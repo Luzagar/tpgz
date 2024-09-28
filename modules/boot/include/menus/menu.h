@@ -38,12 +38,17 @@ enum MenuIndex {
     MN_GENERAL_FLAGS_INDEX,
     MN_DUNGEON_FLAGS_INDEX,
     MN_PORTAL_FLAGS_INDEX,
+    MN_RUPEE_FLAGS_INDEX,
     MN_FLAG_RECORDS_INDEX,
     MN_FLAG_LOG_INDEX,
     // Inventory menu's sub menus
     MN_ITEM_WHELL_INDEX,
     MN_PAUSE_INDEX,
     MN_AMOUNTS_INDEX,
+    // Pause menu's sub menus
+    MN_EQUIPMENT_INDEX,
+    MN_GOLDEN_BUGS_INDEX,
+    MN_HIDDEN_SKILLS_INDEX,
     // Memory menu's sub menus
     MN_WATCHES_INDEX,
     MN_MEMORY_EDITOR_INDEX,
@@ -61,10 +66,17 @@ enum MenuIndex {
     MN_COLLISION_VIEW_INDEX,
     MN_PROJECTION_VIEW_INDEX,
     MN_TRIGGER_VIEW_INDEX,
+    MN_SOUND_TEST_INDEX,
     // Setting menu's sub menus
     MN_POS_SETTINGS_INDEX,
     MN_CREDITS_INDEX,
     MN_COMBO_INDEX,
+    // Tools menu's sub menus
+    MN_TOOLS_CHECKERS_INDEX,
+    MN_TOOLS_CONTROLLER_INDEX,
+    MN_TOOLS_LINK_INDEX,
+    MN_TOOLS_SCENE_INDEX,
+    MN_TOOLS_TIMERS_INDEX,
 
     // This entry is used only to get a count of the number of valid entries.
     MN_COUNT

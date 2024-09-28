@@ -110,6 +110,21 @@ KEEP_FUNC void SaveMngSpecial_WaterfallSidehop() {
     g_dComIfG_gameInfo.info.mRestart.mLastSpeedF = 10.0f;  // link spawns swimming forward
 }
 
+KEEP_FUNC void SaveMngSpecial_EarlyEle() {
+    gSaveManager.injectDefault_during();
+    dComIfGs_onTmpBit(0x0002);
+}
+
+KEEP_FUNC void SaveMngSpecial_HorseSpawn() {
+    gSaveManager.injectDefault_during();
+    g_dComIfG_gameInfo.info.mRestart.mLastMode = 1;  // spawn on epona
+}
+
+KEEP_FUNC void SaveMngSpecial_EldinCollection() {
+    SaveMngSpecial_HorseSpawn();
+    g_dComIfG_gameInfo.info.mRestart.mLastSpeedF = 42.0f;
+}
+
 KEEP_FUNC void SaveMngSpecial_KB2Skip() {
     gSaveManager.injectDefault_during();
     setNextStageLayer(3);
@@ -182,12 +197,11 @@ KEEP_FUNC void SaveMngSpecial_Stallord() {
 }
 
 KEEP_FUNC void SaveMngSpecial_Stallord2() {
-    gSaveManager.mPracticeFileOpts.inject_options_after_counter = 20;
-
     daB_DS_c* stallord = (daB_DS_c*)fopAcM_SearchByName(PROC_B_DS);
+
     // create the phase 2 version of stallord
     fopAcM_create(PROC_B_DS, fopAcM_GetParam(stallord) | 2, &stallord->current.pos,
-                  fopAcM_GetRoomNo(stallord), nullptr, nullptr, -1);
+                fopAcM_GetRoomNo(stallord), nullptr, nullptr, -1);
     fopAcM_delete(stallord);  // delete phase 1 stallord
 
     daObjLv4Wall_c* rwall = (daObjLv4Wall_c*)fopAcM_SearchByName(PROC_Obj_Lv4RailWall);
@@ -199,9 +213,6 @@ KEEP_FUNC void SaveMngSpecial_Stallord2() {
 }
 
 KEEP_FUNC void SaveMngSpecial_Stallord2_init() {
-    gSaveManager.repeat_during = true;
-    gSaveManager.repeat_count = 120;
-
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.info.mZone[0].mBit.mSwitch[0] |= 0x300000;  // turn off intro cs, start fight
     setNextStagePoint(1);                                          // spawn at in front of stally
@@ -235,8 +246,8 @@ KEEP_FUNC void SaveMngSpecial_HugoArchery() {
 
 KEEP_FUNC void SaveMngSpecial_CityPoeCycle() {
     gSaveManager.injectDefault_during();
-    gSaveManager.setSaveAngle(71);
-    gSaveManager.setSavePosition(-14005.31f, 3000.0f, -15854.05f);
+    gSaveManager.setSaveAngle(0);
+    gSaveManager.setSavePosition(-13990.0f, 3000.0f, -16200.0f);
     gSaveManager.setLinkInfo();
 }
 

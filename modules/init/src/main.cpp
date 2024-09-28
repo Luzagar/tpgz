@@ -45,6 +45,7 @@ void main() {
     g_drawListener->addListener(GZ_renderMenuTitle);
     g_drawListener->addListener(GZ_renderFifoQueue);
     g_drawListener->addListener(GZ_displayLinkInfo);
+    g_drawListener->addListener(GZ_displayStageInfo);
     g_drawListener->addListener(GZ_drawHeapInfo);
     g_drawListener->addListener(Timer::drawTimer);
     g_drawListener->addListener(Timer::drawLoadTimer);
@@ -67,6 +68,8 @@ void main() {
     g_modules.push_back(new Module{bit_active, "/tpgz/rels/features/bit.rel"});
 #endif
     g_modules.push_back(new Module{corotd_active, "/tpgz/rels/features/corotd.rel"});
+    g_modules.push_back(new Module{lfc_active, "/tpgz/rels/features/lfc_checker.rel"});
+    g_modules.push_back(new Module{ee_active, "/tpgz/rels/features/ee_checker.rel"});
     g_modules.push_back(new Module{mash_checker_active, "/tpgz/rels/features/mash_checker.rel"});
     g_modules.push_back(new Module{gorge_active, "/tpgz/rels/features/gorge.rel"});
     g_modules.push_back(new Module{rollcheck_active, "/tpgz/rels/features/rollcheck.rel"});
@@ -120,6 +123,7 @@ void GZ_PosSettings_initDefaults() {
 #endif
     GZStng_add(STNG_SPRITES_MENU, new Vec2{25.f, 60.f}, sizeof(Vec2));
     GZStng_add(STNG_SPRITES_DEBUG_INFO, new Vec2{450.0f, 200.f}, sizeof(Vec2));
+    GZStng_add(STNG_SPRITES_STAGE_INFO, new Vec2{145.0f, 350.f}, sizeof(Vec2));
     GZStng_add(STNG_SPRITES_TIMER_SPR, new Vec2{450.0f, 420.f}, sizeof(Vec2));
     GZStng_add(STNG_SPRITES_LOAD_TIMER_SPR, new Vec2{450.0f, 30.f}, sizeof(Vec2));
     GZStng_add(STNG_SPRITES_IGT_TIMER_SPR, new Vec2{35.0f, 30.f}, sizeof(Vec2));

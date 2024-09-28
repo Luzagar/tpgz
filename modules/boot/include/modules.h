@@ -22,6 +22,8 @@ bool umd_active();
 bool bit_active();
 #endif
 bool corotd_active();
+bool lfc_active();
+bool ee_active();
 bool mash_checker_active();
 bool gorge_active();
 bool rollcheck_active();

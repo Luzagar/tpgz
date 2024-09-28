@@ -3,12 +3,14 @@
 
 struct GeneralFlagsData {
     bool l_bossFlag;
-    bool l_rupeeFlag;
+    bool l_coroTD;
     bool l_midnaCharge;
     bool l_transformWarp;
     bool l_midnaZ;
+    bool l_ruslTD;
     bool l_eponaStolen;
     bool l_eponaTamed;
+    bool l_maloMartCT;
     bool l_mapWarping;
     bool l_midnaHealed;
     bool l_midnaRide;
@@ -17,16 +19,20 @@ struct GeneralFlagsData {
 
 enum GeneralFlagsIndex {
     BOSS_FLAG_INDEX,
-    RUPEE_CS_FLAG_INDEX,
+    CORO_TD_INDEX,
     EPONA_STOLEN_INDEX,
     EPONA_TAMED_INDEX,
+    MALO_MART_CT_INDEX,
     MAP_WARPING_INDEX,
     MIDNA_CHARGE_INDEX,
     MIDNA_HEALTHY,
     MIDNA_ON_BACK,
     MIDNA_Z_INDEX,
+    RUSL_TD_INDEX,
     TRANSFORM_WARP_INDEX,
-    WOLF_SENSE_INDEX
+    WOLF_SENSE_INDEX,
+
+    GENERAL_FLAGS_COUNT
 };
 
 extern GeneralFlagsData* generalFlagsData;
@@ -38,5 +44,5 @@ public:
     virtual void draw();
 
 private:
-    Line lines[11];
+    Line lines[GENERAL_FLAGS_COUNT];
 };

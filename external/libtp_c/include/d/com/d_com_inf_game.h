@@ -344,6 +344,9 @@ extern TitleScreenInfo l_fpcNdRq_Queue;
 LIBTP_DEFINE_FUNC(getLayerNo_common_common__14dComIfG_play_cFPCcii, dComIfG_play_c__getLayerNo_common_common_char_const____int__int_,
                   int, tp_getLayerNo, (const char* stageName, int roomId, int layerOverride))
 
+LIBTP_DEFINE_FUNC(getLayerNo__14dComIfG_play_cFi, dComIfG_play_c__getLayerNo_int_,
+                  int, dComIfG_play_c__getLayerNo, (int))
+
 inline dBgS* dComIfG_Bgsp() {
     return &g_dComIfG_gameInfo.play.mDBgS;
 }
@@ -431,6 +434,9 @@ inline void dComIfGs_setLife(u16 amount) {
 }
 inline void dComIfGs_setMaxLife(u8 max) {
     g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setMaxLife(max);
+}
+inline void dComIfGs_setCollectSmell(u8 smell_id) {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusA().setSelectEquip(3, smell_id);
 }
 /*
 inline void dComIfGs_onDungeonItemBossKey(void) {
@@ -619,6 +625,10 @@ inline void dComIfGs_offSwitch(int i_no, int i_roomNo) {
     dSv_info_c__offSwitch(&g_dComIfG_gameInfo.info, i_no, i_roomNo);
 }
 
+inline BOOL dComIfGs_isSwitch(int i_no, int i_roomNo) {
+    return dSv_info_c__isSwitch(&g_dComIfG_gameInfo.info, i_no, i_roomNo);
+}
+
 inline void dComIfGs_putSave(int i_stageNo) {
     tp_putSave(&g_dComIfG_gameInfo.info, i_stageNo);
 }
@@ -700,6 +710,18 @@ inline void dComIfGs_offEventBit(u16 flag) {
     dSv_event_c__offEventBit(&g_dComIfG_gameInfo.info.mSavedata.mEvent, flag);
 }
 
+inline bool dComIfGs_isTmpBit(u16 flag) {
+    return dSv_event_c__isEventBit(&g_dComIfG_gameInfo.info.mTmp, flag);
+}
+
+inline void dComIfGs_onTmpBit(u16 flag) {
+    dSv_event_c__onEventBit(&g_dComIfG_gameInfo.info.mTmp, flag);
+}
+
+inline void dComIfGs_offTmpBit(u16 flag) {
+    dSv_event_c__offEventBit(&g_dComIfG_gameInfo.info.mTmp, flag);
+}
+
 inline void dComIfGs_setKeyNum(u8 num) {
     g_dComIfG_gameInfo.info.getMemory().getBit().setKeyNum(num);
 }
@@ -752,6 +774,20 @@ LIBTP_DEFINE_FUNC(dComIfGs_onOneZoneSwitch__Fii, dComIfGs_onOneZoneSwitch_int__i
 
 LIBTP_DEFINE_FUNC(dComIfGs_onZoneSwitch__Fii, dComIfGs_onZoneSwitch_int__int_,
                   void, dComIfGs_onZoneSwitch, (int, int))
+
+LIBTP_DEFINE_FUNC(setEventReg__11dSv_event_cFUsUc, dSv_event_c__setEventReg_unsigned_short__unsigned_char_, 
+                  void, dSv_event_c__setEventReg, (dSv_event_c*, u16, u8))
+
+LIBTP_DEFINE_FUNC(getEventReg__11dSv_event_cCFUs, dSv_event_c__getEventReg_unsigned_short__const, 
+                  u8, dSv_event_c__getEventReg, (dSv_event_c*, u16))
+
+inline void dComIfGs_setEventReg(u16 flag, u8 value) {
+    dSv_event_c__setEventReg(&g_dComIfG_gameInfo.info.getSavedata().getEvent(), flag, value);
+}
+
+inline u8 dComIfGs_getEventReg(u16 flag) {
+    return dSv_event_c__getEventReg(&g_dComIfG_gameInfo.info.getSavedata().getEvent(), flag); 
+}
 
 class dComIfAc_gameInfo {
 public:
