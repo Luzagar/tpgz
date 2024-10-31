@@ -15,7 +15,10 @@
 #include "libtp_c/include/JSystem/JUtility/JUTGamePad.h"
 #include "libtp_c/include/m_Do/m_Re_controller_pad.h"
 #include "libtp_c/include/f_op/f_op_scene_req.h"
+#include "libtp_c/include/f_op/f_op_actor_iter.h"
 #include "rels/include/defines.h"
+#include "libtp_c/include/d/d_procname.h"
+#include <boot.h>
 
 bool g_framePaused = false;
 
@@ -38,7 +41,7 @@ KEEP_FUNC void GZFlg_addFlag(GZFlag* flag) {
 
 KEEP_FUNC GZFlag* GZFlg_removeFlag(GZFlags flag_id) {
     auto it = g_gzFlags.begin();
-    for (;it != g_gzFlags.end(); ++it) {
+    for (; it != g_gzFlags.end(); ++it) {
         if ((*it)->id == flag_id) {
             break;
         }
@@ -124,6 +127,10 @@ void GZ_execute(int phase) {
             gSaveManager.mPracticeFileOpts.inject_options_after_load();
             gSaveManager.mPracticeFileOpts.inject_options_after_load = nullptr;
         }
+        void* titleScreen = fopAcM_SearchByName(PROC_TITLE);
+        if (titleScreen != NULL) {
+            GZ_endlessNightOnTitle();
+        }
     }
 
     // normally oxygen doesn't get set until going to the file select screen
@@ -134,7 +141,6 @@ void GZ_execute(int phase) {
         dComIfGs_setMaxOxygen(600);
     }
 }
-
 #define ACTIVE_FLAG_FUNC(name, stngId) \
     KEEP_FUNC bool name() { return GZStng_getData(stngId, false); }
 

@@ -19,8 +19,6 @@
 #include "features/projection_view/include/projection_view.h"
 #include "libtp_c/include/m_Do/m_Do_printf.h"
 #include "libtp_c/include/d/s/d_s_logo.h"
-#include "libtp_c/include/d/d_procname.h"
-#include "events/pre_loop_listener.h"
 
 #define HOOK_DEF(rettype, name, params)                                                            \
     typedef rettype(*tp_##name##_t) params;                                                        \
@@ -56,7 +54,6 @@ HOOK_DEF(void, dCcS__MoveAfterCheck, (dCcS*));
 
 HOOK_DEF(int, dScnPly__phase_1, (void*));
 HOOK_DEF(int, dScnPly__phase_4, (void*));
-HOOK_DEF(int, dScnPly_Delete, (void*));
 
 HOOK_DEF(void, dBgS_Acch__CrrPos, (dBgS_Acch*, dBgS&));
 HOOK_DEF(void, daAlink_c__setCutJumpSpeed, (daAlink_c*, int));
@@ -200,11 +197,7 @@ int saveInjectHook(void* i_scene) {
 // Hook to disable save inject flags after dScnPly phase_4 is run
 int endSaveInjectHook(void* i_scene) {
     int rt = dScnPly__phase_4Trampoline(i_scene);
-    s16 scene = fpcM_GetName(i_scene);
-
-    if (scene == PROC_OPENING_SCENE ) {
-        g_PreLoopListener->addListener(GZ_endlessNightOnTitle);
-    }
+    
     if (SaveManager::s_injectSave || SaveManager::s_injectMemfile) {
         SaveManager::s_injectSave = false;
         SaveManager::s_injectMemfile = false;
@@ -212,16 +205,6 @@ int endSaveInjectHook(void* i_scene) {
     
     return rt;
 }
-int dScnPly_DeleteHook(void* i_scene) {
-    s16 scene = fpcM_GetName(i_scene);
-
-    if (scene == PROC_OPENING_SCENE) {
-        g_PreLoopListener->removeListener(GZ_endlessNightOnTitle);
-    }
-
-    return dScnPly_DeleteTrampoline(i_scene);
-}
-
 void dCcSDrawHook(dCcS* i_this) {
     GZ_drawCc(i_this);
     return dCcS__drawTrampoline(i_this);
@@ -460,7 +443,6 @@ void daAlink_c__posMoveHook(daAlink_c* i_this) {
 #define f_myExceptionCallback myExceptionCallback__FUsP9OSContextUlUl
 #define f_dScnPly__phase_1 phase_1__FP9dScnPly_c
 #define f_dScnPly__phase_4 phase_4__FP9dScnPly_c
-#define f_dScnPly_Delete__  dScnPly_Delete__FP9dScnPly_c
 #define f_dScnLogo_c__warningInDraw warningInDraw__10dScnLogo_cFv
 #define f_dCcS__Draw Draw__4dCcSFv
 #define f_dScnPly_BeforeOfPaint dScnPly_BeforeOfPaint__Fv
@@ -485,7 +467,6 @@ void f_putSave(void*, int);
 void f_myExceptionCallback();
 int f_dScnPly__phase_1(void*);
 int f_dScnPly__phase_4(void*);
-int  f_dScnPly_Delete__(void*);
 void f_dCcS__Draw(dCcS*);
 void f_dScnPly_BeforeOfPaint();
 void f_dCcS__MoveAfterCheck(dCcS*);
@@ -517,7 +498,6 @@ KEEP_FUNC void applyHooks() {
     APPLY_HOOK(putSave, &f_putSave, putSaveHook);
     APPLY_HOOK(dScnPly__phase_1, &f_dScnPly__phase_1, saveInjectHook);
     APPLY_HOOK(dScnPly__phase_4, &f_dScnPly__phase_4, endSaveInjectHook);
-    APPLY_HOOK(dScnPly_Delete, &f_dScnPly_Delete__, dScnPly_DeleteHook);
 
 
     APPLY_HOOK(dCcS__draw, &f_dCcS__Draw, dCcSDrawHook);
