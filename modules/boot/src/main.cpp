@@ -202,6 +202,8 @@ KEEP_FUNC void GZ_renderMenuTitle() {
 Texture l_framePauseTex;
 Texture l_framePlayTex;
 
+
+
 KEEP_FUNC void GZ_renderPlayPause() {
     if (GZStng_getData(STNG_TOOLS_FRAME_ADVANCE, false)) {
         if (l_framePauseTex.loadCode == TexCode::TEX_UNLOADED) {
@@ -222,4 +224,13 @@ KEEP_FUNC void GZ_renderPlayPause() {
             free_texture(&l_framePlayTex);
         }
     }
+    
+}
+
+KEEP_FUNC void GZ_endlessNightOnTitle() {
+    g_dComIfG_gameInfo.info.getPlayer().getPlayerStatusB().mTime = 1.0f;
+    g_env_light.mDarkDaytime = 1.0f;
+    g_env_light.field_0x12c3 = 1;
+    g_env_light.field_0xef4.field_0x4 = 1;
+    g_env_light.mRainCheck = 250;
 }

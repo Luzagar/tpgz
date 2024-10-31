@@ -27,6 +27,7 @@ void GZ_handleTurbo();
 
 void GZ_renderMenuTitle();
 void GZ_renderPlayPause();
+void GZ_endlessNightOnTitle();
 
 extern "C" {
 void game_loop();
