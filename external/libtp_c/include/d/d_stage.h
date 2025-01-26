@@ -258,4 +258,6 @@ extern dStage_roomStatus_c dStage_roomControl_c__mStatus[64];
 
 extern "C" s8 dStage_roomControl_c__mStayNo;
 
+extern "C" u32 dStage_roomControl_c__mProcID;
+
 #endif /* D_D_STAGE_H */

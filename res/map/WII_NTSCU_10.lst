@@ -527,6 +527,7 @@
 // Z2AudioLib
 8053b068:Z2SeMgr__mAudioMgrPtr
 
+8053a990:dStage_roomControl_c__mStayNo
 8053a994:dStage_roomControl_c__mStayNo
 
 CC008000:wgPipe

@@ -18,6 +18,7 @@
 #include "libtp_c/include/f_op/f_op_actor_iter.h"
 #include "rels/include/defines.h"
 #include "libtp_c/include/d/d_procname.h"
+#include "libtp_c/include/f_op/f_op_scene_mng.h"
 #include <boot.h>
 
 bool g_framePaused = false;
@@ -127,10 +128,13 @@ void GZ_execute(int phase) {
             gSaveManager.mPracticeFileOpts.inject_options_after_load();
             gSaveManager.mPracticeFileOpts.inject_options_after_load = nullptr;
         }
-        void* titleScreen = fopAcM_SearchByName(PROC_TITLE);
-        if (titleScreen != NULL) {
-            GZ_endlessNightOnTitle();
-        }
+    }
+
+    base_process_class* scene =
+        (base_process_class*)fopScnM_SearchByID(dStage_roomControl_c__mProcID);
+
+    if (scene != NULL && scene->mProcName == PROC_OPENING_SCENE) {
+        GZ_endlessNightOnTitle();
     }
 
     // normally oxygen doesn't get set until going to the file select screen

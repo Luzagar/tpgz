@@ -12,6 +12,8 @@
 struct create_request;
 struct profile_method_class;
 
+typedef unsigned int fpc_ProcID;
+
 typedef struct base_process_class {
     /* 0x00 */ u32 mBsType;
     /* 0x04 */ u32 mBsPcId;

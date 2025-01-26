@@ -188,6 +188,7 @@
 // Z2AudioLib
 80451368:mAudioMgrPtr__10Z2AudioMgr
 
+80450d60:dStage_roomControl_c__mProcID
 80450d64:dStage_roomControl_c__mStayNo
 
 CC008000:wgPipe
