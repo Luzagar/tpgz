@@ -1,8 +1,7 @@
 #ifndef D_A_B_DRE_H
 #define D_A_B_DRE_H
 
-#include "../../f_op/f_op_actor_mng.h"
-#include "../cc/d_cc_d.h"
+#include "../../../../f_op/f_op_actor.h"
 
 
 struct daB_DRE_c : public fopEn_enemy_c {
