@@ -1,7 +1,7 @@
 #include "menus/menu.h"
 
 #ifdef GCN_PLATFORM
-#define ANY_SPECIALS_AMNT 21
+#define ANY_SPECIALS_AMNT 22
 
 enum AnyPracticeIndex {
     ORDON_GATE_CLIP_INDEX,
@@ -45,6 +45,7 @@ enum AnyPracticeIndex {
     CITS_2_INDEX,
     FAN_TOWER_INDEX,
     ARGOROK_INDEX,
+    ARGOROK2_INDEX,
     PALACE_1_INDEX,
     PALACE_2_INDEX,
     EARLY_PLATFORM_INDEX,

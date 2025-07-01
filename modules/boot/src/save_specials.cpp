@@ -6,6 +6,8 @@
 #include "libtp_c/include/f_op/f_op_actor_iter.h"
 #include "libtp_c/include/rel/d/a/b/d_a_b_ds.h"
 #include "libtp_c/include/rel/d/a/obj/d_a_obj_lv4sand.h"
+#include "libtp_c/include/rel/d/a/b/d_a_b_dr.h"
+#include "libtp_c/include/rel/d/a/b/d_a_b_dre.h"
 #include "libtp_c/include/d/d_procname.h"
 #include "rels/include/defines.h"
 
@@ -201,15 +203,15 @@ KEEP_FUNC void SaveMngSpecial_Stallord2() {
 
     // create the phase 2 version of stallord
     fopAcM_create(PROC_B_DS, fopAcM_GetParam(stallord) | 2, &stallord->current.pos,
-                fopAcM_GetRoomNo(stallord), nullptr, nullptr, -1);
+                  fopAcM_GetRoomNo(stallord), nullptr, nullptr, -1);
     fopAcM_delete(stallord);  // delete phase 1 stallord
 
     daObjLv4Wall_c* rwall = (daObjLv4Wall_c*)fopAcM_SearchByName(PROC_Obj_Lv4RailWall);
     daObjSwSpinner_c* spinnersw = (daObjSwSpinner_c*)fopAcM_SearchByName(PROC_Obj_SwSpinner);
 
     spinnersw->mRotSpeedY = 3000;  // set arena spinner switch to max speed
-    rwall->field_0x954 = 101;  // set spinner switch speed counter to threshold
-    rwall->mHeight = 3370.0f;  // set arena height to max
+    rwall->field_0x954 = 101;      // set spinner switch speed counter to threshold
+    rwall->mHeight = 3370.0f;      // set arena height to max
 }
 
 KEEP_FUNC void SaveMngSpecial_Stallord2_init() {
@@ -257,6 +259,20 @@ KEEP_FUNC void SaveMngSpecial_FanTower() {
 }
 
 KEEP_FUNC void SaveMngSpecial_Argorok() {
+    gSaveManager.injectDefault_during();
+    g_dComIfG_gameInfo.info.mZone[0].mBit.mSwitch[0] |= 0x10000;
+}
+
+KEEP_FUNC void SaveMngSpecial_Argorok2() {
+    daB_DR_c* dr = (daB_DR_c*)fopAcM_SearchByName(PROC_B_DR);
+
+    // create the phase 2 version of argorok
+    fopAcM_create(PROC_B_DRE, fopAcM_GetParam(dr) | 2, &dr->current.pos, fopAcM_GetRoomNo(dr),
+                  nullptr, nullptr, -1);
+    fopAcM_delete(dr);  // delete phase 1 argorok
+}
+
+KEEP_FUNC void SaveMngSpecial_Argorok2_init() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.info.mZone[0].mBit.mSwitch[0] |= 0x10000;
 }

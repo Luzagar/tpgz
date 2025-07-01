@@ -47,6 +47,8 @@ void SaveMngSpecial_HugoArchery();
 void SaveMngSpecial_CityPoeCycle();
 void SaveMngSpecial_FanTower();
 void SaveMngSpecial_Argorok();
+void SaveMngSpecial_Argorok2();
+void SaveMngSpecial_Argorok2_init();
 
 void SaveMngSpecial_Palace1();
 void SaveMngSpecial_Palace2();
