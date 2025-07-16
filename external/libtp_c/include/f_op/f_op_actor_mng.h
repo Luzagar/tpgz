@@ -4,6 +4,7 @@
 #include "f_op_actor.h"
 #include "../f_pc/f_pc_manager.h"
 #include "../defines.h"
+#include "../d/com/d_com_inf_game.h"
 
 struct fopAcM_prmBase_class {
     /* 0x00 */ u32 field_0x00;
@@ -255,6 +256,14 @@ inline f32 fopAcM_searchActorDistanceY(const fopAc_ac_c* actorA, const fopAc_ac_
 
 inline u16 fopAcM_GetSetId(const fopAc_ac_c* p_actor) {
     return p_actor->mSetID;
+}
+
+inline void fopAcM_onSwitch(const fopAc_ac_c* i_actor, int sw) {
+    return dComIfGs_onSwitch(sw, fopAcM_GetHomeRoomNo(i_actor));
+}
+
+inline void fopAcM_offSwitch(const fopAc_ac_c* i_actor, int sw) {
+    return dComIfGs_offSwitch(sw, fopAcM_GetHomeRoomNo(i_actor));
 }
 
 LIBTP_DEFINE_FUNC(fopAcM_create__FsUlPC4cXyziPC5csXyzPC4cXyzSc, fopAcM_create_short__unsigned_long__cXyz_const____int__csXyz_const____cXyz_const____signed_char_,

@@ -49,7 +49,7 @@ KEEP_FUNC AnySavesMenu::AnySavesMenu(Cursor& cursor)
           {"city 2", CITS_2_INDEX, "The 2nd City in the Sky segment"},
           {"fan tower", FAN_TOWER_INDEX, "Final fan room in City"},
           {"argorok", ARGOROK_INDEX, "City in the Sky boss"},
-          {"argorok", ARGOROK2_INDEX, "Argorok 2nd phase"},
+          {"argorok 2", ARGOROK2_INDEX, "Argorok 2nd phase"},
           {"palace 1", PALACE_1_INDEX, "The 1st Palace of Twilight segment"},
           {"palace 2", PALACE_2_INDEX, "The 2nd Palace of Twilight segment"},
           {"early platform", EARLY_PLATFORM_INDEX, "Early platform in Palace of Twilight"},

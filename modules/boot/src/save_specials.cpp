@@ -264,17 +264,23 @@ KEEP_FUNC void SaveMngSpecial_Argorok() {
 }
 
 KEEP_FUNC void SaveMngSpecial_Argorok2() {
-    daB_DR_c* dr = (daB_DR_c*)fopAcM_SearchByName(PROC_B_DR);
+    daB_DR_c* dr_p = (daB_DR_c*)fopAcM_SearchByName(PROC_B_DR);
 
-    // create the phase 2 version of argorok
-    fopAcM_create(PROC_B_DRE, fopAcM_GetParam(dr) | 2, &dr->current.pos, fopAcM_GetRoomNo(dr),
-                  nullptr, nullptr, -1);
-    fopAcM_delete(dr);  // delete phase 1 argorok
+
+    dComIfGs_onZoneSwitch(2, fopAcM_GetRoomNo(dr_p));
+
+     fopAcM_create(PROC_B_DR, fopAcM_GetParam(dr_p), &dr_p->current.pos,
+                  fopAcM_GetRoomNo(dr_p), nullptr, nullptr, -1);
+      fopAcM_onSwitch(dr_p, 0x3F);
+    fopAcM_delete(dr_p);
+
 }
 
 KEEP_FUNC void SaveMngSpecial_Argorok2_init() {
     gSaveManager.injectDefault_during();
     g_dComIfG_gameInfo.info.mZone[0].mBit.mSwitch[0] |= 0x10000;
+    setNextStagePoint(2);
+    bossFlags = 1;
 }
 
 KEEP_FUNC void SaveMngSpecial_Palace1() {

@@ -82,6 +82,7 @@ def main(args=None):
         "cits_2",
         "fan_tower",
         "argorok",
+        "argorok",
         "palace_1",
         "palace_2",
         "early_platform",
